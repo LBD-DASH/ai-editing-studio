@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/url';
+---
+<Base title="How it works: AI draft edit plus human review" description="Our process: you send text and a brief, an AI tool makes a first edit pass, and a human reviews it before delivery." path="how-it-works/">
+<h1>How it works</h1>
+<ol>
+<li><strong>Request a quote.</strong> Tell us what the text is, who it is for, and your deadline.</li>
+<li><strong>AI first pass.</strong> An AI editing tool corrects grammar, spelling and clarity and suggests tighter wording.</li>
+<li><strong>Human review.</strong> A person reads the whole result, fixes mistakes the AI made, keeps your voice, and flags claims you should verify.</li>
+<li><strong>Delivery.</strong> You get the edited text with changes visible, so you can accept or reject each one.</li>
+</ol>
+<p class="note">AI tools can make mistakes, which is why a human always reviews before delivery. Please do not send confidential personal or client data unless we have agreed how it is handled first.</p>
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+</Base>

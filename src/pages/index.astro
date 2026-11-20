@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '../lib/url';
+const services = (await getCollection('services')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+<Base title="AI Editing Studio: AI-assisted editing with human review" description="Editing and proofreading for blog posts, emails, product descriptions and reports. An AI first pass, then a human reviews the result." path="">
+<h1>Editing and proofreading, AI-assisted and human-checked</h1>
+<p>We edit blog posts, emails, product descriptions and reports. An AI tool does a first pass, then a person reviews and corrects the result before it comes back to you.</p>
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+<h2>What we edit</h2>
+<div class="grid">{services.map((s) => <div class="card"><h3><a href={withBase(`services/${s.id}/`)}>{s.data.name}</a></h3><p>{s.data.summary}</p></div>)}</div>
+<h2>How it works</h2>
+<p>You send the text and a short brief. We run an AI-assisted draft edit, a human reviews it, and you get the result with changes you can see. <a href={withBase('how-it-works/')}>Read the process</a>.</p>
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+</Base>
