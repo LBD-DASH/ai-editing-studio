@@ -1,0 +1,20 @@
+---
+import '../styles/global.css';
+import { withBase, absUrl, SITE_NAME } from '../lib/url';
+const { title, description, path = '', jsonLd } = Astro.props;
+const full = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{full}</title><meta name="description" content={description} />
+<link rel="canonical" href={absUrl(path, Astro.site)} />
+<meta property="og:title" content={full} /><meta property="og:description" content={description} />
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href={withBase()}>{SITE_NAME}</a>
+<nav><a href={withBase('services/blog-posts/')}>Blog posts</a><a href={withBase('services/emails/')}>Emails</a><a href={withBase('services/product-descriptions/')}>Product descriptions</a><a href={withBase('services/reports/')}>Reports</a><a href={withBase('how-it-works/')}>How it works</a><a href={withBase('faq/')}>FAQ</a><a class="btn" href={withBase('contact/')}>Request a quote</a></nav></div></header>
+<main><div class="wrap"><slot /></div></main>
+<footer><div class="wrap"><a href={withBase('about/')}>About</a><a href={withBase('privacy/')}>Privacy</a><a href={withBase('disclosure/')}>Disclosure</a><a href={withBase('contact/')}>Request a quote</a><p>{SITE_NAME}, run by Kevin Britz. AI-assisted editing with human review.</p></div></footer>
+</body></html>
