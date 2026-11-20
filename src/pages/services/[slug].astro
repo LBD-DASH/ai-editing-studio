@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/url';
+export async function getStaticPaths() {
+  return (await getCollection('services')).map((s) => ({ params: { slug: s.id }, props: { s } }));
+}
+const { s } = Astro.props;
+const { Content } = await render(s);
+const d = s.data;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title={d.title} description={d.description} path={`services/${s.id}/`} jsonLd={jsonLd}>
+<h1>{d.name}: editing and proofreading</h1>
+<p>{d.summary}</p><Content />
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+<h2>Good for</h2><ul>{d.goodFor.map((g) => <li>{g}</li>)}</ul>
+<h2>What we check</h2><ul>{d.checks.map((g) => <li>{g}</li>)}</ul>
+<h2>Questions</h2>{d.faq.map((f) => <div><h3>{f.q}</h3><p>{f.a}</p></div>)}
+<p class="note">Pricing depends on the job, so we quote each one. <a href={withBase('contact/')}>Request a quote</a>.</p>
+</Base>
