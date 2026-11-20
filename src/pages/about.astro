@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/url';
+---
+<Base title="About AI Editing Studio and who runs it" description="AI Editing Studio is an AI-assisted editing and proofreading service run by Kevin Britz, with a human quality review on every job." path="about/">
+<h1>About</h1>
+<p>AI Editing Studio is an editing and proofreading service run by Kevin Britz. We use AI tools for a fast first pass and a human review for quality.</p>
+<p>This is a new service. We do not publish client lists, results or reviews until we have real ones we can show.</p>
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+</Base>

@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/url';
+const faq = [
+ { q: 'What do you edit?', a: 'Blog posts, emails, product descriptions and reports.' },
+ { q: 'Is the editing done by AI or by a person?', a: 'Both. An AI tool does a first pass and a person reviews the result before delivery.' },
+ { q: 'How much does it cost?', a: 'It depends on the job, so we quote each one. Use Request a quote.' },
+ { q: 'Do you take payment on this website?', a: 'No. This site only collects enquiries.' },
+ { q: 'Should I send confidential data?', a: 'Please remove personal and confidential client data first. See the privacy page.' },
+];
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="FAQ: AI-assisted editing with human review" description="Answers about what we edit, how AI and human review work together, quotes, and handling of confidential text." path="faq/" jsonLd={jsonLd}>
+<h1>FAQ</h1>
+{faq.map((f) => <div><h3>{f.q}</h3><p>{f.a}</p></div>)}
+<p><a class="btn" href={withBase('contact/')}>Request a quote</a></p>
+</Base>
